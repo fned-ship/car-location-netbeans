@@ -26,9 +26,9 @@ public class returncar extends javax.swing.JFrame {
     /**
      * Creates new form returncar
      */
-    private static String SUrl = "jdbc:mysql://localhost:3306/cars_renting";
-    private static String SUser = "root";
-    private static String SPass = "1996";
+    private static final String SUrl = "jdbc:postgresql://localhost:5432/location_voiture"; // Replace with your database details
+    private static final String SUser = "yousseffned"; // Replace with your username
+    private static final String SPass = "12345"; // Replace with your password
 
     public returncar() {
         initComponents();

@@ -19,10 +19,15 @@ public class signup extends javax.swing.JFrame {
     /**
      * Creates new form signup
      */
+
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/location_voiture"; // Replace with your database details
+    private static final String DB_USER = "yousseffned"; // Replace with your username
+    private static final String DB_PASSWORD = "12345"; // Replace with your password
     
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/cars_renting";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "1996";
+    // private static final String DB_URL = "jdbc:mysql://localhost:3306/cars_renting";
+    // private static final String DB_USER = "root";
+    // private static final String DB_PASSWORD = "1996";
+
     public signup() {
         initComponents();
     }
@@ -274,7 +279,7 @@ public class signup extends javax.swing.JFrame {
             return ;
         }
     try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
-        String checkUserQuery = "SELECT * FROM user WHERE id = ?";
+        String checkUserQuery = "SELECT * FROM usersaccount WHERE id = ?";
         try (PreparedStatement checkUserStatement = connection.prepareStatement(checkUserQuery)) {
             checkUserStatement.setString(1, username);
             ResultSet resultSet = checkUserStatement.executeQuery();
@@ -284,7 +289,7 @@ public class signup extends javax.swing.JFrame {
             }
         }
         
-        String insertUserQuery = "INSERT INTO user (id, password) VALUES (?, ?)";
+        String insertUserQuery = "INSERT INTO usersaccount (id, password) VALUES (?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertUserQuery)) {
             preparedStatement.setString(1, username);

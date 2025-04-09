@@ -27,9 +27,11 @@ public class login extends javax.swing.JFrame {
     /**
      * Creates new form login
      */
-    private static String SUrl = "jdbc:mysql://localhost:3306/cars_renting";
-    private static String SUser = "root";
-    private static String SPass = "1996";
+
+    private static String SUrl = "jdbc:postgresql://localhost:5432/location_voiture"; // Replace with your database details
+    private static String SUser = "yousseffned"; // Replace with your username
+    private static String SPass = "12345"; // Replace with your password
+
     public login() {
         initComponents();
     }
@@ -238,7 +240,7 @@ public class login extends javax.swing.JFrame {
     private boolean authenticateUser(String username, String password)
     {
         try (Connection connection = DriverManager.getConnection(SUrl,SUser,SPass)) {
-        String query = "SELECT password FROM user WHERE id = ?";
+        String query = "SELECT password FROM usersaccount WHERE id = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -303,3 +305,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }
+
+// mysql -u root -p
+// USE DB_name

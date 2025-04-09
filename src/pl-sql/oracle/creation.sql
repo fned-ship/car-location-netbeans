@@ -15,7 +15,7 @@ INSERT INTO customertb (name, address, phone) VALUES ('adam', 'iin klm 6', '9999
 INSERT INTO customertb (name, address, phone) VALUES ('fned', 'gremda klm 9', '9899999');
 
 
-create table user(
+create table usersaccount(
      id varchar(255) primary key,
      password varchar(255) );
 create TABLE location(
