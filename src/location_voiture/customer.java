@@ -27,7 +27,7 @@ public class customer extends javax.swing.JFrame {
      */
     private static String SUrl = "jdbc:mysql://localhost:3306/cars_renting";
     private static String SUser = "root";
-    private static String SPass = "W7301@jqir#";
+    private static String SPass = "1996";
 
     public customer() {
         initComponents();

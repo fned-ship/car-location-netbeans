@@ -22,7 +22,7 @@ public class signup extends javax.swing.JFrame {
     
     private static final String DB_URL = "jdbc:mysql://localhost:3306/cars_renting";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "W7301@jqir#";
+    private static final String DB_PASSWORD = "1996";
     public signup() {
         initComponents();
     }
@@ -268,7 +268,7 @@ public class signup extends javax.swing.JFrame {
     }
 
     else{
-        if (!Admin.equals("W7301@jqir#"))
+        if (!Admin.equals("123"))
         {
             JOptionPane.showMessageDialog(new JFrame(), "WRONG ADMIN CONFIRMATION ! ", "ERROR", JOptionPane.ERROR_MESSAGE);
             return ;
