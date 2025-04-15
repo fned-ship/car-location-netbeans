@@ -416,7 +416,7 @@ try {
 }
 
 String status = "";
-int model;
+String model;
 try {
     Connection conn = DriverManager.getConnection(SUrl, SUser, SPass);
 
@@ -428,7 +428,7 @@ try {
 
     if (rs.next()) {
         status = rs.getString("status");
-        model = rs.getInt("model");
+        model = rs.getString("model");
     } else {
         JOptionPane.showMessageDialog(this, "Car ID not found.");
         return;
@@ -468,31 +468,31 @@ try {
 
 try {
     Connection conn = DriverManager.getConnection(SUrl, SUser, SPass);
-    PreparedStatement stmt = conn.prepareStatement("SELECT return_day, sysdate() FROM location WHERE rent_id = ?");
+    PreparedStatement stmt = conn.prepareStatement("SELECT return_day, NOW() AS current_time FROM location WHERE rent_id = ?"); // sysdate() = NOW() in postgres
     stmt.setInt(1, rentid); 
 
     ResultSet rs = stmt.executeQuery();
 
     if (rs.next()) {
         java.util.Date return_date = rs.getDate("return_day");
-        java.util.Date sys_date = rs.getDate("sysdate()");
+        java.util.Date sys_date = rs.getDate("current_time");
 
         long diffInMillies = sys_date.getTime() - return_date.getTime();
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 
         Car car;
-        int prix;
-        if (model < 2020) {
-            car = new Car_old();
-        } else {
-            car = new Car_new();
-        }
+        int prix = 300 ;
+        // if (model < 2020) {
+        //     car = new Car_old();
+        // } else {
+        //     car = new Car_new();
+        // }
 
-        if (car instanceof Car_new) {
-            prix = ((Car_new) car).getPenalty();
-        } else {
-            prix = ((Car_old) car).getPenalty();
-        }
+        // if (car instanceof Car_new) {
+        //     prix = ((Car_new) car).getPenalty();
+        // } else {
+        //     prix = ((Car_old) car).getPenalty();
+        // }
 
         if (diff > 0) {
             long total = prix * diff;
@@ -588,7 +588,7 @@ try {
         
 
         try (Connection conn = DriverManager.getConnection(SUrl, SUser, SPass)) {
-            String query= "SELECT * FROM cartb WHERE carReg IN ( SELECT carReg FROM ( SELECT carReg , COUNT(*) AS id  FROM location   GROUP BY carReg   ORDER BY carReg DESC   LIMIT 3 )AS subquery );" ;
+            String query= "SELECT * FROM cartb WHERE carReg IN ( SELECT carReg FROM ( SELECT carReg , COUNT(*) AS count  FROM location   GROUP BY carReg   ORDER BY count DESC LIMIT 3 )AS subquery );" ;
             PreparedStatement pst=conn.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 

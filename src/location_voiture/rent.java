@@ -504,13 +504,15 @@ public class rent extends javax.swing.JFrame {
     }
 
     
-    String insertLocationQuery = "INSERT INTO location (carReg, customer_id, rent_day, return_day) VALUES (?, ?, ?, ?)";
+    String insertLocationQuery = "INSERT INTO location (carReg, customer_id, rent_day, return_day,fees) VALUES (?, ?, ?, ?, 0)";
     try (Connection connection = DriverManager.getConnection(SUrl, SUser, SPass);
          PreparedStatement preparedStatement = connection.prepareStatement(insertLocationQuery)) {
         preparedStatement.setInt(1, carId);
         preparedStatement.setInt(2, customerId);
-        preparedStatement.setString(3, rent_date);
-        preparedStatement.setString(4, return_date);
+        // preparedStatement.setString(3, rent_date);
+        // preparedStatement.setString(4, return_date);
+        preparedStatement.setDate(3, new java.sql.Date(dateValue.getTime()));
+        preparedStatement.setDate(4, new java.sql.Date(dateValue2.getTime()));
         preparedStatement.executeUpdate();
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -641,8 +643,10 @@ public class rent extends javax.swing.JFrame {
 
         PreparedStatement pstmt = conn.prepareStatement("UPDATE location SET rent_day =?, return_day =? WHERE rent_id =?");
 
-        pstmt.setString(1,rent_date );
-        pstmt.setString(2,return_date);
+        // pstmt.setString(1,rent_date );
+        // pstmt.setString(2,return_date);
+        pstmt.setDate(1, new java.sql.Date(dateValue.getTime()));
+        pstmt.setDate(2, new java.sql.Date(dateValue2.getTime()));
         pstmt.setInt(3, rentid);
 
         int rowsUpdated = pstmt.executeUpdate();

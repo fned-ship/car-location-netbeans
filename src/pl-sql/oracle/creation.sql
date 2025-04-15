@@ -21,7 +21,7 @@ create table usersaccount(
 create TABLE location(
 	rent_id 	INT auto_increment primary key ,
     carReg INT not null ,
-     customer_id INT not null,
+    customer_id INT not null,
     rent_day DATE not null ,
     return_day DATE not null,
     fees INT not null,
@@ -32,7 +32,7 @@ create TABLE location(
 create TABLE retour(
 	rent_id 	INT not null  ,
     carReg INT not null ,
-     customer_id INT not null,
+    customer_id INT not null,
     return_day DATE not null ,
 	delay INT not null default 0 ,
     fees INT not null default 0,
@@ -50,8 +50,8 @@ INSERT INTO cartb (brand, model, status, price) VALUES ('Mercedes', 'C-Class', '
 -- Inserting values into the location table
 INSERT INTO location (carReg, customer_id, rent_day, return_day , fees)
 VALUES 
-    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Audi' AND model = 'A4'), 1, '2024-04-25', '2024-04-28' , 100),
-    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Mercedes' AND model = 'C-Class'), 2, '2024-04-26', '2024-05-02' , 150);
+    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Audi' AND model = 'A4'), 1, '2025-04-25', '2025-04-28' , 100),
+    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Mercedes' AND model = 'C-Class'), 2, '2025-04-26', '2025-05-02' , 150);
 
 
 

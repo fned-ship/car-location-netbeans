@@ -28,6 +28,7 @@ public class customer extends javax.swing.JFrame {
     private static final String SUrl = "jdbc:postgresql://localhost:5432/location_voiture"; // Replace with your database details
     private static final String SUser = "yousseffned"; // Replace with your username
     private static final String SPass = "12345"; // Replace with your password
+    
 
     public customer() {
         initComponents();

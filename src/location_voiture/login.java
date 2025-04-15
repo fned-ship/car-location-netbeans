@@ -32,6 +32,8 @@ public class login extends javax.swing.JFrame {
     private static String SUser = "yousseffned"; // Replace with your username
     private static String SPass = "12345"; // Replace with your password
 
+    
+
     public login() {
         initComponents();
     }

@@ -461,35 +461,24 @@ public class cars extends javax.swing.JFrame {
                 
                 try (Connection connection = DriverManager.getConnection(SUrl,SUser,SPass)) {
                 query2 = "UPDATE cartb SET status = ? WHERE carreg = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query2)) {
-            preparedStatement.setString(1, Status);
-            preparedStatement.setString(2, carReg.getText());
+                    try (PreparedStatement preparedStatement = connection.prepareStatement(query2)) {
+                        preparedStatement.setString(1, Status);
+                        preparedStatement.setInt(2, Integer.parseInt(carReg.getText()));
 
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(this, "Status updated successfully.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Car registration not found.");
-            }
-        }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
-    }
+                        int rowsAffected = preparedStatement.executeUpdate();
+                        if (rowsAffected > 0) {
+                            JOptionPane.showMessageDialog(this, "Status updated successfully.");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Car registration not found.");
+                        }
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+                }
             }
             displaycars();
-        
-        
-                
-            
-            
-            
-            
-            
-          
-            
-            
-                
+         
             
         }
         
