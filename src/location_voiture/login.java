@@ -18,10 +18,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author benje
- */
 public class login extends javax.swing.JFrame {
 
     /**
@@ -31,6 +27,8 @@ public class login extends javax.swing.JFrame {
     private static String SUrl = "jdbc:postgresql://localhost:5432/location_voiture"; // Replace with your database details
     private static String SUser = "yousseffned"; // Replace with your username
     private static String SPass = "12345"; // Replace with your password
+
+    
 
     public login() {
         initComponents();

@@ -5,7 +5,7 @@ import java.util.List;
 public class RentalDetailsTest {
     public static void main(String[] args) {
         // Call the getRentalDetails method from RentalDetails2 with customerId = 1
-        List<RentalRecord> rentalDetails = RentalDetails2.getRentalDetails(1);
+        List<RentalRecord> rentalDetails = RentalDetails2.getRentalDetails(6);
 
         // Check if there are any records and print them
         if (rentalDetails.isEmpty()) {

@@ -13,10 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
-/**
- *
- * @author benje
- */
+
 public class rent extends javax.swing.JFrame {
 
     /**
@@ -488,6 +485,27 @@ public class rent extends javax.swing.JFrame {
     } catch (SQLException ex) {
         ex.printStackTrace();
     }
+
+    String checkCarConditiQuery = "SELECT condition FROM cartb WHERE carReg = ?";
+    try (Connection connection = DriverManager.getConnection(SUrl, SUser, SPass);
+         PreparedStatement preparedStatement = connection.prepareStatement(checkCarConditiQuery)) {
+        preparedStatement.setInt(1, carId);
+        try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (!(resultSet.next()) ) {
+                JOptionPane.showMessageDialog(this, "Car registration does not exist in the car table.");
+                return;
+            }
+            String state=resultSet.getString("condition");
+
+            if (!(state.equals("fine"))) {
+                JOptionPane.showMessageDialog(this, "Car is broken-down ! ");
+                return;
+            }
+            
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
     
     String checkCustomerIdQuery = "SELECT COUNT(*) FROM customertb WHERE customer_id = ?";
     try (Connection connection = DriverManager.getConnection(SUrl, SUser, SPass);
@@ -504,13 +522,15 @@ public class rent extends javax.swing.JFrame {
     }
 
     
-    String insertLocationQuery = "INSERT INTO location (carReg, customer_id, rent_day, return_day) VALUES (?, ?, ?, ?)";
+    String insertLocationQuery = "INSERT INTO location (carReg, customer_id, rent_day, return_day,fees) VALUES (?, ?, ?, ?, 0)";
     try (Connection connection = DriverManager.getConnection(SUrl, SUser, SPass);
          PreparedStatement preparedStatement = connection.prepareStatement(insertLocationQuery)) {
         preparedStatement.setInt(1, carId);
         preparedStatement.setInt(2, customerId);
-        preparedStatement.setString(3, rent_date);
-        preparedStatement.setString(4, return_date);
+        // preparedStatement.setString(3, rent_date);
+        // preparedStatement.setString(4, return_date);
+        preparedStatement.setDate(3, new java.sql.Date(dateValue.getTime()));
+        preparedStatement.setDate(4, new java.sql.Date(dateValue2.getTime()));
         preparedStatement.executeUpdate();
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -595,7 +615,7 @@ public class rent extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(this, "Rent information deleted and car status updated successfully!");
             } else {
-                JOptionPane.showMessageDialog(this, "thsi rent doesnt exist!");
+                JOptionPane.showMessageDialog(this, "this rent doesnt exist!");
             }
 
         } finally {
@@ -641,8 +661,10 @@ public class rent extends javax.swing.JFrame {
 
         PreparedStatement pstmt = conn.prepareStatement("UPDATE location SET rent_day =?, return_day =? WHERE rent_id =?");
 
-        pstmt.setString(1,rent_date );
-        pstmt.setString(2,return_date);
+        // pstmt.setString(1,rent_date );
+        // pstmt.setString(2,return_date);
+        pstmt.setDate(1, new java.sql.Date(dateValue.getTime()));
+        pstmt.setDate(2, new java.sql.Date(dateValue2.getTime()));
         pstmt.setInt(3, rentid);
 
         int rowsUpdated = pstmt.executeUpdate();
@@ -713,7 +735,7 @@ public class rent extends javax.swing.JFrame {
         String query;
         try{
             Connection con=DriverManager.getConnection(SUrl,SUser,SPass);
-            query="SELECT carReg , brand , model , status , price FROM cartb WHERE status = 'AVAILABLE' ";
+            query="SELECT carReg , brand , model , status , price FROM cartb WHERE status = 'AVAILABLE' and condition='fine' ";
             PreparedStatement pst=con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
             DefaultTableModel model = (DefaultTableModel)cartb.getModel();

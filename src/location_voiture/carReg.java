@@ -4,10 +4,6 @@
  */
 package location_voiture;
 
-/**
- *
- * @author benje
- */
 class carReg {
     
 }

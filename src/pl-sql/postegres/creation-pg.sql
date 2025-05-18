@@ -61,8 +61,8 @@ VALUES
 -- Inserting values into the location table
 INSERT INTO location (carReg, customer_id, rent_day, return_day, fees)
 VALUES 
-    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Audi' AND model = 'A4'), 1, '2024-04-25', '2024-04-28', 100),
-    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Mercedes' AND model = 'C-Class'), 2, '2024-04-26', '2024-05-02', 150);
+    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Audi' AND model = 'A4'), 1, '2025-04-25', '2025-04-28', 100),
+    ((SELECT carReg FROM cartb WHERE status = 'BOOKED' AND brand = 'Mercedes' AND model = 'C-Class'), 2, '2025-04-26', '2025-05-02', 150);
 
 -- Update rental count in customertb
 UPDATE customertb

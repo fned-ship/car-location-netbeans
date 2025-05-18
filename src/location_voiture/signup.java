@@ -10,10 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-/**
- *
- * @author benje
- */
+
 public class signup extends javax.swing.JFrame {
 
     /**

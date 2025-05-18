@@ -4,10 +4,7 @@
  */
 package location_voiture;
 
-/**
- *
- * @author benje
- */
+
 public class start extends javax.swing.JFrame implements Runnable{
 
     /**

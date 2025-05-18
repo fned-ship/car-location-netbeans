@@ -16,10 +16,6 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author benje
- */
 public class customer extends javax.swing.JFrame {
 
     /**
@@ -28,6 +24,7 @@ public class customer extends javax.swing.JFrame {
     private static final String SUrl = "jdbc:postgresql://localhost:5432/location_voiture"; // Replace with your database details
     private static final String SUser = "yousseffned"; // Replace with your username
     private static final String SPass = "12345"; // Replace with your password
+    
 
     public customer() {
         initComponents();
@@ -503,22 +500,17 @@ public class customer extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String query;
         String reg =id.getText();
-
-        if (reg.equals(""))
-        {
+        if (reg.equals("")){
             JOptionPane.showMessageDialog(new JFrame(), "Missing customer id number", "ERROR", JOptionPane.ERROR_MESSAGE);
         }else{
-            if(!isNumber(reg))
-            {
-            JOptionPane.showMessageDialog(new JFrame(), "id must be a number", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return ;
+            if(!isNumber(reg)){
+                JOptionPane.showMessageDialog(new JFrame(), "id must be a number", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return ;
             }
             int CarReg =Integer.parseInt(id.getText());
             try{
-                
                 Connection con =DriverManager.getConnection(SUrl,SUser,SPass);
                 query = "DELETE FROM customertb WHERE customer_id = ?";
-
                 try (PreparedStatement statement = con.prepareStatement(query)) {
 
                     statement.setInt(1, CarReg);
@@ -532,15 +524,11 @@ public class customer extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(new JFrame(), "Customer id not found", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-
                 con.close();
-
             }catch(Exception e){
                 System.out.print(e.getMessage());
             }
-
             displaycustomer();
-
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
